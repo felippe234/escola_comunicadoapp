@@ -32,15 +32,15 @@ class ComunicacaoController {
       mensagem,
       data_envio,
       tipo,
-      remetente_id,
+      remetente,
       publico_alvo,
       turma_id,
       aluno_id
     } = req.body;
 
-    if (!titulo || !mensagem || !tipo || !remetente_id || !publico_alvo) {
+    if (!titulo || !mensagem || !tipo || !remetente || !publico_alvo) {
       return res.status(400).json({
-        erro: "Campos obrigatórios: titulo, mensagem, tipo, remetente_id, publico_alvo"
+        erro: "Campos obrigatórios: titulo, mensagem, tipo, remetente, publico_alvo"
       });
     }
 
@@ -50,7 +50,7 @@ class ComunicacaoController {
         mensagem,
         data_envio: data_envio || new Date().toISOString(),
         tipo,
-        remetente_id,
+        remetente,
         publico_alvo,
         turma_id: turma_id ?? null,
         aluno_id: aluno_id ?? null
@@ -71,15 +71,15 @@ class ComunicacaoController {
       mensagem,
       data_envio,
       tipo,
-      remetente_id,
+      remetente,
       publico_alvo,
       turma_id,
       aluno_id
     } = req.body;
 
-    if (!titulo || !mensagem || !tipo || !remetente_id || !publico_alvo) {
+    if (!titulo || !mensagem || !tipo || !remetente || !publico_alvo) {
       return res.status(400).json({
-        erro: "Campos obrigatórios: titulo, mensagem, tipo, remetente_id, publico_alvo"
+        erro: "Campos obrigatórios: titulo, mensagem, tipo, remetente, publico_alvo"
       });
     }
 
@@ -89,7 +89,7 @@ class ComunicacaoController {
         mensagem,
         data_envio: data_envio || new Date().toISOString(),
         tipo,
-        remetente_id,
+        remetente,
         publico_alvo,
         turma_id: turma_id ?? null,
         aluno_id: aluno_id ?? null
@@ -97,7 +97,7 @@ class ComunicacaoController {
 
       if (linhasAfetadas === 0) return res.status(404).json({ msg: "Comunicado não encontrado" });
 
-      res.status(200).json({ id, titulo, mensagem, data_envio, tipo, remetente_id, publico_alvo, turma_id, aluno_id });
+      res.status(200).json({ id, titulo, mensagem, data_envio, tipo, remetente, publico_alvo, turma_id, aluno_id });
     } catch (err) {
       console.error(err);
       res.status(500).json({ erro: "Erro ao atualizar comunicado" });

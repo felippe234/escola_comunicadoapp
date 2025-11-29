@@ -20,14 +20,14 @@ class ComunicacaoRepository {
   async criar(comunicado) {
     const [result] = await conexao.execute(
       `INSERT INTO comunicacao (
-        titulo, mensagem, data_envio, tipo, remetente_id, publico_alvo, turma_id, aluno_id
+        titulo, mensagem, data_envio, tipo, remetente, publico_alvo, turma_id, aluno_id
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         comunicado.titulo,
         comunicado.mensagem,
         comunicado.data_envio,
         comunicado.tipo,
-        comunicado.remetente_id,
+        comunicado.remetente,
         comunicado.publico_alvo,
         comunicado.turma_id ?? null,
         comunicado.aluno_id ?? null
@@ -42,7 +42,7 @@ class ComunicacaoRepository {
   async atualizar(id, comunicado) {
     const [result] = await conexao.execute(
       `UPDATE comunicacao SET
-        titulo = ?, mensagem = ?, data_envio = ?, tipo = ?, remetente_id = ?,
+        titulo = ?, mensagem = ?, data_envio = ?, tipo = ?, remetente = ?,
         publico_alvo = ?, turma_id = ?, aluno_id = ?
       WHERE id = ?`,
       [
@@ -50,7 +50,7 @@ class ComunicacaoRepository {
         comunicado.mensagem,
         comunicado.data_envio,
         comunicado.tipo,
-        comunicado.remetente_id,
+        comunicado.remetente,
         comunicado.publico_alvo,
         comunicado.turma_id ?? null,
         comunicado.aluno_id ?? null,
